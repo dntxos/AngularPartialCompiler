@@ -14,3 +14,5 @@ USAGE:<BR>
 ---
 In VisualStudio you can set APC to compile your partials at every build.<Br>
 Set on build-events>pre-build: apc.exe $(ProjectDir)\output.ts $(ProjectDir)\
+
+<a href='https://github.com/dntxos/AngularPartialCompiler/raw/master/AngularPartialCompiler/AngularPartialCompiler/setup/apc-setup.exe'>Download installer</a>
