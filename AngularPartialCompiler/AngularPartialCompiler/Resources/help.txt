@@ -1,12 +1,13 @@
 Compiles your Html Partial files into a Typescript file as class Atributes.
 
 USAGE:
-	APC.EXE *[OUTPUT] [PATH] [FILTER] [CLASSNAME]
+	APC.EXE *[OUTPUT] [PATH] [FILTER] [CLASSNAME] [MODULENAME]
 	*Mandatory
 
 	[OUTPUT] - Filename of generated typescript file
 	[PATH] - Directory path that contains your HTML partial files.
 	[FILTER] - Filter files with a pattern. (Default:"view*.html").
 	[CLASSNAME] - Name of generated typescript class.
+	[MODULENAME] - Typescript module name.
 
 By geraBytes - http://gerabytes.com.br

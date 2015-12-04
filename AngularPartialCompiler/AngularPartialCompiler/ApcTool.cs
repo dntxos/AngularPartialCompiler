@@ -17,7 +17,7 @@ namespace AngularPartialCompiler
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             System.Reflection.AssemblyName assemblyName = assembly.GetName();
             Version version = assemblyName.Version;
-            Console.WriteLine("AngularPartialCompiler / " + assemblyName.Name + " - Ver.:" + version.ToString());
+            Console.WriteLine("AngularPartialCompiler / " + assemblyName.Name + " - Ver.:" + version.ToString()+" by geraBytes (http://gerabytes.com.br)");
         }
 
         public static void Run()
@@ -28,7 +28,7 @@ namespace AngularPartialCompiler
             Console.Read();
         }
 
-        public static void Run(string _output,string _path=".\\",string _filter = "view*.html",string _classname="_apc")
+        public static void Run(string _output,string _path=".\\",string _filter = "view*.html",string _classname="_apc",string _module="App")
         {
             header();
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
@@ -36,13 +36,17 @@ namespace AngularPartialCompiler
             Version version = assemblyName.Version;
 
             var _apc = new Apc(_path, _filter);
-            var _tsData = "export class _apc {\r\n public static ver:string=\""+version.ToString()+"\";\r\n";
+            var _tsData = "module "+_module+"{\r\n export class "+_classname+" {\r\n public static ver:string=\""+version.ToString()+"\";\r\n";
             foreach (var partial in _apc.Partials)
             {
-                _tsData += "\r\n\r\n public static " + partial.PartialName.Replace(".", "_").Replace(" ", "_")+":string=\"";
-                _tsData += partial.PartialHtml.Replace("\"", "\\\"").Replace("\r","\\r").Replace("\n","\\n")  +"\";";
+                var _partialData = partial.PartialHtml.Replace("\"", "\\\"").Replace("\r", "\\r").Replace("\n", "\\n");
+                _tsData += "\r\n\r\n/** \r\n* Preview.Content:";
+                _tsData += "\r\n*\""+ _partialData.PadRight(200,' ').Substring(0,200)+"\"...";
+                _tsData += "\r\n**/";
+                _tsData += "\r\npublic static " + partial.PartialName.Replace(".", "_").Replace(" ", "_")+":string=\"";
+                _tsData += _partialData  +"\";";
             }
-            _tsData += "}";
+            _tsData += "\r\n} \r\n};";
 
             File.WriteAllText(_output, _tsData);
         }

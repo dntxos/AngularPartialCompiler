@@ -24,6 +24,9 @@ namespace AngularPartialCompiler
                 case 4:
                     ApcTool.Run(args[0], args[1], args[2],args[3]);
                     break;
+                case 5:
+                    ApcTool.Run(args[0], args[1], args[2], args[3],args[4]);
+                    break;
                 default:
                     ApcTool.Run();
                     break;
